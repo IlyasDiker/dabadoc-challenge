@@ -28,7 +28,7 @@ class UsersController < ApplicationController
             }, status: :ok
         else 
             render json: {
-                error: 'Invalid username or password'
+                error: 'Invalid email or password'
             }, status: :unprocessable_entity
         end
     end
