@@ -16,4 +16,18 @@ class ApplicationController < ActionController::Base
             end
         end
     end
+
+    def authorized_user
+        decoded_token = decode_token()
+        if decoded_token
+            user_id = decoded_token[0]['user_id']
+            @user = User.find_by(id: user_id)
+        end
+    end
+
+    def authorize
+        render json: {
+            message: "You have to log in."
+        }, status: :unauthorized unless authorized_user
+    end
 end
