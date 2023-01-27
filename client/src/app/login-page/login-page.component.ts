@@ -29,8 +29,8 @@ export class LoginPageComponent {
     if(this.loginForm.valid){
       this.progressForm.mode= 'indeterminate';
       loginUser(
-        this.loginForm.get('title')?.value,
-        this.loginForm.get('content')?.value
+        this.loginForm.get('email')?.value,
+        this.loginForm.get('password')?.value
       ).then((res:any)=>{
         this.progressForm.value = 100;
         
