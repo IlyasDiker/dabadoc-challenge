@@ -103,6 +103,7 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    jwt (2.6.0)
     loofah (2.19.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -221,12 +222,13 @@ PLATFORMS
   x64-mingw-ucrt
 
 DEPENDENCIES
-  bcrypt
+  bcrypt (~> 3.1.7)
   bootsnap
   capybara
   debug
   importmap-rails
   jbuilder
+  jwt
   mongoid
   puma (~> 5.0)
   rails (~> 7.0.4, >= 7.0.4.2)
