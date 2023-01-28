@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-
-const { registerUser } = require('../api');
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-register-page',
@@ -18,21 +17,23 @@ export class RegisterPageComponent {
     value: 0
   };
 
-  constructor(private _snackBar: MatSnackBar, private router: Router) {
+  constructor(private _snackBar: MatSnackBar, private router: Router, private apiService: ApiService) {
     this.registerForm = new FormGroup({
       name: new FormControl(null, Validators.required),
       email: new FormControl(null, Validators.email),
-      password: new FormControl(null, Validators.required)
+      password: new FormControl(null, Validators.required),
+      password_confirmation: new FormControl(null, Validators.required)
     })
   }
 
   onSubmit = () =>{
     if(this.registerForm.valid){
       this.progressForm.mode= 'indeterminate';
-      registerUser(
+      this.apiService.registerUser(
         this.registerForm.get('name')?.value,
         this.registerForm.get('email')?.value,
-        this.registerForm.get('password')?.value
+        this.registerForm.get('password')?.value,
+        this.registerForm.get('password_confirmation')?.value
       ).then((res:any)=>{
         this.progressForm.value = 100;
         

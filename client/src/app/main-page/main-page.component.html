@@ -1,1 +1,38 @@
-<p>main-page works!</p>
+<section class="gray-100">
+    <div class="container padded py-5">
+        <form class="example-form flex flex-col" [formGroup]="addQuestionForm" (ngSubmit)="onSubmit()">
+            <div class="flex-row gap-20">
+                <mat-form-field appearance="outline" class="flex-grow-1">
+                    <mat-label>Title</mat-label>
+                    <input matInput formControlName="title" placeholder="Ask a question">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Location</mat-label>
+                    <input matInput formControlName="coords" placeholder="0.00, 0.00">
+                    <button type="button" matSuffix mat-icon-button aria-label="Get Current Location" (click)="getCurrentLocation()">
+                        <mat-icon>gps_fixed</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+            <mat-form-field appearance="outline">
+                <mat-label>Content</mat-label>
+                <textarea matInput formControlName="content"  placeholder="Describe your question..."></textarea>
+            </mat-form-field>
+            <button type="submit" mat-flat-button color="primary">Add Question</button>
+        </form>
+    </div>
+</section>
+<div class="container padded my-5">
+    <ng-template *ngFor="let item of questions; index as i;">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>
+                    {{item.title}}
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                {{item.content}}
+            </mat-card-content>
+        </mat-card>
+    </ng-template>
+</div>

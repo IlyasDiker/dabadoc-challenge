@@ -12,7 +12,11 @@
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Password</mat-label>
-                <input type="password" formControlName="password" autocomplete="current-password" matInput>
+                <input type="password" formControlName="password" autocomplete="new-password" matInput>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Confirm Password</mat-label>
+                <input type="password" formControlName="password_confirmation" autocomplete="new-password" matInput>
             </mat-form-field>
             <button mat-flat-button type="submit" color="primary" [disabled]="progressForm.mode == 'indeterminate'">
                 Login

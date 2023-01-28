@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-
-const { loginUser } = require('../api');
+import { ApiService } from '../api.service';
  
 @Component({
   selector: 'app-login-page',
@@ -18,7 +17,7 @@ export class LoginPageComponent {
     value: 0
   };
 
-  constructor(private _snackBar: MatSnackBar, private router: Router) {
+  constructor(private _snackBar: MatSnackBar, private router: Router, private apiService: ApiService) {
     this.loginForm = new FormGroup({
       email: new FormControl(null, Validators.email),
       password: new FormControl(null, Validators.required)
@@ -28,7 +27,7 @@ export class LoginPageComponent {
   onSubmit = () =>{
     if(this.loginForm.valid){
       this.progressForm.mode= 'indeterminate';
-      loginUser(
+      this.apiService.loginUser(
         this.loginForm.get('email')?.value,
         this.loginForm.get('password')?.value
       ).then((res:any)=>{
@@ -40,6 +39,9 @@ export class LoginPageComponent {
 
         this.router.navigate(['/']);
       }, ()=>{
+        this._snackBar.open("Wrong Credentials","Close", {
+          duration: 4000
+        });
         this.progressForm.mode = 'determinate';
       }).finally(()=>{
         this.progressForm.mode = 'determinate';
