@@ -3,7 +3,6 @@ class UsersController < ApplicationController
     def login
         @user = User.find_by(email: login_params[:email])
 
-        p @user.authenticate(login_params[:password])
         if @user && @user.authenticate(login_params[:password])
             token = encode_token({ user_id: @user.id})
             render json: {
@@ -19,7 +18,7 @@ class UsersController < ApplicationController
 
     def create
         @user = User.create(user_params)
-        
+
         if @user.save
             token = encode_token({ user_id: @user.id})
             render json: {
@@ -36,7 +35,7 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.require(:user).permit(:name, :email, :password)
+        params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
 
     def login_params
